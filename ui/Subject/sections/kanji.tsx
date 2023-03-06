@@ -2,14 +2,7 @@ import { API_URL } from "@/lib/api/fetchApi";
 
 import { PartialSubject, Subject } from "@/lib/models/subject";
 import SVG from "@/ui/SVG";
-import {
-  Flex,
-  Img,
-  LinkBox,
-  LinkOverlay,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Flex, LinkBox, LinkOverlay, Text, VStack } from "@chakra-ui/react";
 
 import { SectionProps } from "../Section";
 import { ListProps } from "../Section/components/List";
@@ -162,7 +155,9 @@ export const kanjiSections = (
   }
 
   const meanings =
-    studyData(kanji, "meaning")?.items.map((si) => si.value) || [];
+    studyData(kanji, "meaning")
+      ?.items.filter((si) => !si.is_hidden && si.is_valid_answer)
+      .map((si) => si.value) || [];
   const meaningMnemonic = studyData(kanji, "meaning")?.mnemonic;
 
   const onyomi =
@@ -179,6 +174,9 @@ export const kanjiSections = (
     ) || [];
   const readingMnemonic = studyData(kanji, "reading")?.mnemonic;
 
+  const jlptGrade: number =
+    (kanji.additional_study_data ?? {})["jlpt_grade"] || "-";
+
   return [
     { ...radicalsSection },
     {
@@ -188,8 +186,12 @@ export const kanjiSections = (
           headlessTable: {
             table: [
               {
-                title: "meanings",
+                title: "Meanings",
                 value: meanings.join(", "),
+              },
+              {
+                title: "JLPT Grade",
+                value: jlptGrade.toString(),
               },
             ],
           },

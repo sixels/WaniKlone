@@ -10,7 +10,7 @@ export interface Subject {
   slug: string;
   priority: number;
   resources?: { [key: string]: RemoteContent[] };
-  complimentary_study_data?: { [key: string]: any };
+  additional_study_data?: { [key: string]: any };
   study_data: StudyData[];
   dependencies: string[];
   dependents: string[];

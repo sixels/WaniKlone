@@ -31,7 +31,7 @@ export default function CardPage({ card, sections }: CardPageProps) {
 
   return (
     <Container maxW={"7xl"}>
-      <Stack spacing={8} pt={0} align="center" position={"relative"}>
+      <Stack spacing={8} pt={10} align="center" position={"relative"}>
         <Center position={"relative"}>
           <Box
             position={"absolute"}

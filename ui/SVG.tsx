@@ -11,16 +11,15 @@ export default function SVG({ url, style }: SVGProps) {
 
   useEffect(() => {
     setIsLoading(true);
-    try {
-      fetch(url, { cache: "force-cache" })
-        .then((res) => res.text())
-        .then((content) => {
-          setContent(content);
-          setIsLoading(false);
-        });
-    } catch (e) {
-      console.warn(e);
-    }
+
+    fetch(url, { cache: "force-cache" })
+      .then((res) => res.text())
+      .then((content) => {
+        setContent(content);
+        setIsLoading(false);
+      })
+      .catch(console.warn)
+      .finally(() => setIsLoading(false));
   }, []);
 
   if (isLoading) {
@@ -28,7 +27,7 @@ export default function SVG({ url, style }: SVGProps) {
   }
 
   if (!content) {
-    return <>A</>;
+    return <></>;
   }
 
   return <div style={style} dangerouslySetInnerHTML={{ __html: content }} />;

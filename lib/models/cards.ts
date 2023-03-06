@@ -1,3 +1,5 @@
+import { Patterns, Sentence } from "./subject";
+
 export interface CreateKanjiRequest {
   alt_names?: string[];
   kunyomi?: string[];
@@ -28,12 +30,12 @@ export interface CreateVocabularyRequest {
   level?: number;
   meaning_mnemonic?: string;
   name?: string;
-  patterns?: Pattern[];
+  patterns?: Patterns;
   reading?: string;
   reading_mnemonic?: string;
   sentences?: Sentence[];
   word?: string;
-  word_type?: string[];
+  parts_of_speech?: string[];
 }
 
 export interface Kanji {
@@ -121,11 +123,11 @@ export interface UpdateVocabularyRequest {
   level?: number;
   meaning_mnemonic?: string;
   name?: string;
-  patterns?: Pattern[];
+  patterns?: Patterns;
   reading?: string;
   reading_mnemonic?: string;
   sentences?: Sentence[];
-  word_type?: string[];
+  parts_of_speech?: string[];
 }
 
 export interface Vocabulary {
@@ -136,21 +138,11 @@ export interface Vocabulary {
   level: number;
   meaning_mnemonic: string;
   name: string;
-  patterns?: Pattern[];
+  patterns?: Patterns;
   reading: string;
   reading_mnemonic: string;
   sentences?: Sentence[];
   updated_at?: string;
   word: string;
-  word_type: string[];
-}
-
-export interface Pattern {
-  name: string;
-  sentences: Sentence[];
-}
-
-export interface Sentence {
-  meaning: string;
-  sentence: string;
+  parts_of_speech: string[];
 }
