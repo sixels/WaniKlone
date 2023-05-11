@@ -1,4 +1,5 @@
-// import "../styles/globals.css";
+import "../styles/globals.css";
+
 import React from "react";
 import { AppProps } from "next/app";
 import SuperTokensReact, { SuperTokensWrapper } from "supertokens-auth-react";
@@ -12,9 +13,6 @@ import { theme } from "@/lib/theme";
 import { SWRConfig } from "swr";
 import { PageWithLayout } from "@/ui/layouts";
 import DefaultLayout from "@/ui/layouts/Default";
-
-import Footer from "@/ui/Footer";
-import Navbar from "@/ui/Navbar";
 
 import Favicon from "@/assets/icon.svg";
 
