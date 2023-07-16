@@ -10,7 +10,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-import AuthRoute from "@/lib/auth/wrappers/AuthRoute";
+import AuthContext from "@/lib/auth/context";
 import ReviewForecast from "@/ui/Dashboard/ReviewForecast";
 import LinkCard from "@/ui/Dashboard/LinkCard";
 
@@ -20,6 +20,7 @@ import { API_URL } from "@/lib/api/fetchApi";
 import { useSRS, WANIKANI_DECK_ID } from "@/lib/hooks/srs";
 import StudyModal from "@/ui/Dashboard/StudyModal";
 import { differenceInHours } from "date-fns";
+import AuthProvider from "@/lib/auth/context";
 
 type CardProgress = {
   kind: "radical" | "kanji" | "vocabulary";
@@ -93,7 +94,7 @@ const LEVEL_PROGRESS: {
   ],
 };
 
-function Dashboard() {
+export function Dashboard() {
   const { data, isLoading, isError, mutate } = useSRS();
 
   if (isLoading) {
@@ -221,9 +222,5 @@ function Dashboard() {
 }
 
 export default function () {
-  return (
-    <AuthRoute>
-      <Dashboard />
-    </AuthRoute>
-  );
+  return <Dashboard />;
 }

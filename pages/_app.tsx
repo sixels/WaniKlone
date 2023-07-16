@@ -2,11 +2,9 @@ import "../styles/globals.css";
 
 import React from "react";
 import { AppProps } from "next/app";
-import SuperTokensReact, { SuperTokensWrapper } from "supertokens-auth-react";
 import { ChakraProvider } from "@chakra-ui/react";
 import Head from "next/head";
 
-import { frontendConfig } from "@/lib/supertokens/frontendConfig";
 import SEO from "@/lib/config/seo";
 import swrConfiguration from "@/lib/config/swr";
 import { theme } from "@/lib/theme";
@@ -22,14 +20,11 @@ import "@fontsource/inter/700.css";
 import "@fontsource/noto-sans-jp/400.css";
 import "@/assets/styles/calendar.css";
 import "@/assets/styles/markdown.css";
+import AuthProvider, { AuthContext } from "@/lib/auth/context";
 
 type AppPropsWithLayout = AppProps & {
   Component: PageWithLayout;
 };
-
-if (typeof window !== "undefined") {
-  SuperTokensReact.init(frontendConfig());
-}
 
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout =
@@ -50,11 +45,9 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
       </Head>
 
       <ChakraProvider theme={theme}>
-        <SuperTokensWrapper>
-          <SWRConfig value={swrConfiguration}>
-            {getLayout(<Component {...pageProps} />)}
-          </SWRConfig>
-        </SuperTokensWrapper>
+        <SWRConfig value={swrConfiguration}>
+          <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
+        </SWRConfig>
       </ChakraProvider>
     </>
   );

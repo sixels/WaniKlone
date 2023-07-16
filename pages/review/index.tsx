@@ -1,5 +1,4 @@
 import { API_URL } from "@/lib/api/fetchApi";
-import AuthRoute from "@/lib/auth/wrappers/AuthRoute";
 import { useSRSSession } from "@/lib/hooks/srs";
 import { CreateReviewRequest } from "@/lib/models/review";
 import { QueueItemAnswers, SessionQueue } from "@/lib/models/srs";
@@ -184,9 +183,9 @@ function Review() {
 
 const ReviewWrapper: PageWithLayout = () => {
   return (
-    <AuthRoute>
-      <Review />
-    </AuthRoute>
+    // <AuthRoute>
+    <Review />
+    // </AuthRoute>
   );
 };
 
